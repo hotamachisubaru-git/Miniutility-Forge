@@ -1,2 +1,74 @@
-target/
+# Gradle
+.gradle/
+gradle-app.setting
+!/gradle-app.setting
+build/
+!/build/distributions
+!/build/libs
+
+# Forge
+run/
+run-*/
+runConfigurations/
+studioBuild/
+.idea/
+*.iml
+*.iws
+*.ipr
+caches/
+coverage/
+dist/
+external-build/
+test-build/
+mcp/
+mcp_src/
+mcp_src*/
+mcp_src/
+
+# IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Compiled class file
+*.class
+
+# Log files
+*.log
+
+# Jar files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Generated directories
+src/generated/
+
+# Paper/Spigot related (not used in Forge branch)
+pom.xml
 dependency-reduced-pom.xml
+plugin.yml
+target/
+
+# Gradle wrapper (keep but ignore local changes)
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties

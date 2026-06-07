@@ -1,15 +1,14 @@
-package org.hotamachisubaru.miniutility.Nickname;
+package org.hotamachisubaru.miniutility.forge.nickname;
 
 import java.util.regex.Pattern;
 
-public final class NicknameValidator {
-
+public final class ForgeNicknameValidator {
     private static final int MIN_LENGTH = 1;
     private static final int MAX_LENGTH = 16;
     private static final Pattern LEGACY_CODE_PATTERN = Pattern.compile("(?i)[&§][0-9a-fk-or]");
     private static final Pattern FORBIDDEN_CHARACTER_PATTERN = Pattern.compile("[<>\"'`$\\\\]");
 
-    private NicknameValidator() {
+    private ForgeNicknameValidator() {
     }
 
     public static String validatePlain(String input) {

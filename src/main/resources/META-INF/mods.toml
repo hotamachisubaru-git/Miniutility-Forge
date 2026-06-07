@@ -1,0 +1,35 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+issueTrackerURL="https://github.com/hotamachisubaru-git/Miniutility-Forge/issues"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="hotamachisubaru"
+description='''
+Miniutility for Forge 1.20.1.
+'''
+displayTest="IGNORE_SERVER_VERSION"
+
+[[dependencies.${mod_id}]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.20,48)"
+ordering="NONE"
+side="SERVER"
+
+[[dependencies.${mod_id}]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.20.2)"
+ordering="NONE"
+side="SERVER"
+
+[[dependencies.${mod_id}]]
+modId="luckperms"
+mandatory=false
+versionRange="[5.5,)"
+ordering="AFTER"
+side="SERVER"

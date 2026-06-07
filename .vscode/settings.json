@@ -5,6 +5,9 @@
             "matchCommandLine": true
         }
     },
-    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.import.gradle.enabled": true,
+    "java.import.gradle.wrapper.enabled": true,
+    "java.import.maven.enabled": false,
+    "java.configuration.updateBuildConfiguration": "automatic",
     "java.compile.nullAnalysis.mode": "automatic"
 }

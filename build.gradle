@@ -35,10 +35,6 @@ minecraft {
             }
         }
 
-        client {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
@@ -53,6 +49,11 @@ minecraft {
 
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
+}
+
+sourceSets.main.java {
+    exclude '**/*.bak/**'
+    exclude '**/*.java.bak'
 }
 
 repositories {

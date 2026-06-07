@@ -72,3 +72,7 @@ target/
 # Gradle wrapper (keep but ignore local changes)
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
+
+# Misc
+*.bak
+*.md

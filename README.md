@@ -1,76 +1,87 @@
-> ネイティブ対応
-> Paper 26.1.2 安定版
+# Miniutility Forge
 
-# こちらは Paper 26.1.2 向けのブランチです
+Minecraft Forge 1.20.1 向けのサーバー用ユーティリティ mod です。
 
-- 開発依存は `io.papermc.paper:paper-api:26.1.2.build.66-stable` を使用します。
-- Adventure は `net.kyori:adventure-bom:5.1.1` で安定版を固定します。
-- Paper 26.1 系からバージョン命名が `-R0.1-SNAPSHOT` ではなく `26.1.2.build.N-stable` 形式に変わっています。
-- 取得先は従来のスナップショットリポジトリではなく `https://repo.papermc.io/repository/maven-public/` です。
-- 開発とビルドには Java 25 が必要です。
+この mod はサーバー側だけに導入します。クライアント側の `mods` フォルダには入れないでください。メニューやゴミ箱などの GUI はバニラのコンテナ画面を使うため、参加者のクライアントに Miniutility を導入する必要はありません。
 
-## バージョン更新
+## 対応環境
 
-- `pom.xml` の `minecraft.version` が `plugin.yml` の `api-version` に反映されます。
-- `paper.version` はコンパイル対象の Paper API です。
-- Paper の安定版ビルドへ追従する場合は、次のスクリプトを使用します。
+- Minecraft: `1.20.1`
+- Forge: `47.4.20` 以上、`48` 未満
+- Java: `17`
+- 任意依存: LuckPerms `5.5` 以上
 
-```powershell
-./scripts/update-paper-version.ps1 -MinecraftVersion 26.1.2 -UpdateProjectVersion
-```
+## 導入
 
-- `.github/workflows/paper-version-update.yml` から手動実行できます。週次でも同じ処理を実行し、差分がある場合は日本語タイトルと日本語コミットメッセージで PR を作成します。
+1. `build/libs/miniutility-1.20.1-47.4.20-1.0.0.jar` を Forge サーバーの `mods` フォルダへ配置します。
+2. サーバーを起動します。
+3. LuckPerms の prefix をチャット表示へ反映したい場合は、LuckPerms もサーバー側へ導入します。
 
-## ブランチ運用
+クライアント側へこの mod を入れる必要はありません。`mods.toml` ではサーバー専用依存として定義し、クライアントの mod 一致チェックも無視する設定にしています。
 
-- Forge向け変更は `forge` ブランチにコミット・プッシュする。
-- Paper向け変更は `master` または `main` ブランチにコミット・プッシュする。
+## 機能
 
-注意: LunaChat が導入されているサーバーでは、以下の設定が必要です。
+- `/menu` から開けるメインメニュー
+- 死亡地点の記録とワープ
+- エンダーチェストを開く
+- ゴミ箱を開く
+- どこでも作業台
+- 経験値レベルの増減
+- サバイバル / クリエイティブの切り替え
+- クリーパー爆発によるブロック破壊の切り替え
+- ニックネームの保存、表示、色変更
+- LuckPerms prefix の表示切り替え
+- ニックネーム DB の再読み込み
 
-```yaml
-# -------------------- 通常チャット設定 --------------------
-
-# 通常チャット（非チャンネルチャット）の装飾を、LunaChatから行うかどうか。
-enableNormalChatMessageFormat: true
-
-# チャット装飾のフォーマット設定。
-# フォーマット設定には、下記のキーワードが使用できます。
-# %displayname : 発言者表示名
-# %player   : 発言者ID
-# %world    : 発言したワールド名（spigot側に導入したときに有効です。MultiVerseが導入されている場合は、ワールドの表示名を取得して使用します。）
-# %server   : 発言者の接続サーバー名（BungeeCord側に導入したときに有効です。）
-# %prefix   : プレフィックス（Vaultとプレフィックス/サフィックスプラグインが導入されている場合に置き換えられます）
-# %suffix   : サフィックス（Vaultとプレフィックス/サフィックスプラグインが導入されている場合に置き換えられます）
-# %date     : 日付
-# %time     : 時刻
-# %msg      : 発言内容（Japanize変換された場合は、Japanize結果を含みます。）
-normalChatMessageFormat: '&f%prefix%displayname%suffix&a:&f %msg'
-
-# 通常チャット（非チャンネルチャット）で、カラーコード（&aや&bなど）を
-# 使用可能にするかどうか。falseに設定すると、カラーコードは変換されません。
-enableNormalChatColorCode: false
-
-# 通常チャット（非チャンネルチャット）をクリック可能にするかどうか。
-enableNormalChatClickable: false
-
-# 通常チャット（非チャンネルチャット）をコンソールにログ出力するかどうか。
-displayNormalChatOnConsole: true
-```
+ニックネーム DB は `config/miniutility/nickname.db` に SQLite 形式で保存されます。
 
 ## コマンド
 
-- `/menu` メニューを開きます。
-- `/prefixtoggle [on|off]` プレフィックス結合の有効無効を切り替えます。
-- `/load` データベースからニックネームを再読み込みします。
+| コマンド | 説明 |
+| --- | --- |
+| `/menu` | Miniutility メニューを開きます。 |
+| `/load` | ニックネーム DB を再読み込みします。 |
+| `/prefixtoggle` | 自分の LuckPerms prefix 表示を切り替えます。 |
+| `/prefixtoggle on` | 自分の LuckPerms prefix 表示を有効にします。 |
+| `/prefixtoggle off` | 自分の LuckPerms prefix 表示を無効にします。 |
+| `/miniutility menu` | Miniutility メニューを開きます。 |
+| `/miniutility death` | 死亡地点メニューを開きます。 |
+| `/miniutility enderchest` | エンダーチェストを開きます。 |
+| `/miniutility crafting` | 作業台を開きます。 |
+| `/miniutility trash` | ゴミ箱を開きます。閉じると中身は削除されます。 |
+| `/miniutility creeper` | クリーパー保護を切り替えます。 |
+| `/miniutility exp <amount>` | 経験値レベルを増減します。 |
+| `/miniutility gamemode` | サバイバル / クリエイティブを切り替えます。 |
+| `/miniutility nickname set <nickname>` | ニックネームを設定します。 |
+| `/miniutility nickname colored <nickname>` | `&6` などの色コード付きニックネームを設定します。 |
+| `/miniutility nickname color <color>` | 既存ニックネームの色を変更します。 |
+| `/miniutility nickname input` | チャット入力でニックネームを設定します。 |
+| `/miniutility nickname colorinput` | チャット入力で色付きニックネームを設定します。 |
+| `/miniutility nickname remove` | ニックネームをリセットします。 |
 
-## 機能一覧
+ニックネームは 1 から 16 文字で、通常設定では空白を使えません。記号は `_` と `-` のみ使用できます。色付きニックネームでは `&6ほたまち` のような Minecraft のレガシーカラーコードを使えます。
 
-- 死亡地点にワープ
-- 経験値制御
-- ゲームモード切り替え
-- クリーパーのブロック破壊防止
-- エンダーチェスト
-- ゴミ箱
-- ニックネーム変更
-- どこでも作業台
+## ビルド
+
+```powershell
+./gradlew.bat build --console=plain
+```
+
+生成物は `build/libs/` に出力されます。
+
+開発用のサーバー起動は次のコマンドです。
+
+```powershell
+./gradlew.bat runServer --console=plain
+```
+
+VS Code の Forge 実行構成を生成する場合は次を実行します。
+
+```powershell
+./gradlew.bat genVSCodeRuns --console=plain
+```
+
+## ブランチ運用
+
+- Forge 向け変更は `forge` ブランチにコミット、プッシュします。
+- Paper 向け変更は Paper 版のブランチで扱います。
